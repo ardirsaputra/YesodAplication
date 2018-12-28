@@ -1,0 +1,220 @@
+   $maybe (Fomulirdata nama institusi bidangkeahlian jeniskelamin tanggal_lahir alamat bakat pengalaman hobi nomor ) <- submission
+                        Your file type is <em>#{Fomulirdata nama}</em>. You say it has: <em>#{nama}</em>
+
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TypeFamilies #-}
+module Handler.Daftar where
+
+import Import
+--import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
+import Text.Julius()
+
+-- Define our data that will be used for creating the form.
+getDaftarR :: Handler Html
+getDaftarR = do
+    (formWidget, formEnctype) <- generateFormPost formDaftar
+    let submission = Nothing :: Maybe Fomulirdata
+    defaultLayout $ do
+        setTitle "Registrasi"
+        $(widgetFile "daftar")
+
+postDaftarR :: Handler Html
+postDaftarR = do
+    ((result, formWidget), formEnctype) <- runFormPost formDaftar
+    let submission = case result of 
+            FormSuccess res -> Just res
+            _ -> Nothing
+    defaultLayout $ do
+        setTitle "Regisrasi"
+        $(widgetFile "daftar")
+
+data Fomulirdata = Fomulirdata
+    { nama  :: Text
+    , institusi :: Text 
+    , bidangkeahlian :: Text
+    , jeniskelamin :: Text
+    , tahun_lahir :: Int
+    , alamat :: Text 
+    , bakat :: Text
+    , pengalaman :: Text
+    , hobi :: Text
+    , nomor :: Text
+    }
+    deriving Show 
+
+data JenisKelamin = Laki_laki | Perempuan
+    deriving (Show,Eq,Enum,Bounded)
+
+data Instansi = UNILA | UBL | Darmajaya | ITERA
+    deriving (Show,Eq,Enum,Bounded)
+
+formDaftar :: Form Fomulirdata
+formDaftar = Fomulirdata
+    <$> areq textField "nama" Nothing 
+    <*> areq (selectFieldList instansi) "institusi" Nothing
+    <*> areq textField "bidangkeahlian" Nothing
+    <*> areq (selectFieldList jk) "jeniskelamin" Nothing
+    <*> areq dataTahunField "tahun_lahir" Nothing
+    <*> areq textField "alamat" Nothing 
+    <*> areq textField "bakat" Nothing
+    <*> areq textField "pengalaman" Nothing  
+    <*> areq textField "hobi" Nothing
+    <*> areq textField "nomor" Nothing
+    where 
+        errorMessage :: Text
+        errorMessage = "Anda terlalu tua untuk mengikuti program ini!"
+        dataTahunField = checkBool (>= 1990) errorMessage intField
+        instansi :: [(Text,Instansi)]
+        instansi = [("Universitas Lampung",UNILA),("Universitas Bandar Lampung",UBL),("Universitas Darmajaya",Darmajaya),("ITERA",ITERA)]
+        jk :: [(Text,JenisKelamin)]
+        jk = [("Laki-laki",Laki_laki),("Perempuan",Perempuan)]
+
+        -- where nama = FieldSettings
+    --         { fsLabel = "Nama Lengkap ..."
+    --         , fsTooltip = "Nama Lengkap"
+    --         , fsId = Nothing
+    --         , fsName = "nama"
+    --         , fsAttrs =
+    --             [ ("class", "form-control")
+    --             , ("placeholder", "Nama Lengkap ...")
+    --             ]
+    --         }
+    --     bidangkeahlian = FieldSettings
+    --         {fsLabel = "Bidang Keahlian ? "
+    --         ,fsTooltip = "Bidang Keahlian ? "
+    --         ,fsId = Nothing
+    --         ,fsName = "bidang"
+    --         , fsAttrs = 
+    --             [ ("class","form-control")
+    --             , ("placeholder","bidnag")
+    --             ]
+    --         }
+        
+
+background: linear-gradient(120deg, #ffffff, hsl(90,100%,50%),#ffffff);
+
+===============================================================================
+
+$maybe (Fomulirdata nama institusi bidangkeahlian jeniskelamin tanggal_lahir alamat bakat pengalaman hobi nomor ) <- submission
+                        <ul>
+                            <li>#{nama}
+                            <li>#{institusi}</li>
+                            <li>#{bidangkeahlian}</li>
+                            <li>#{jeniskelamin}</li>
+                            <li>#{tanggal_lahir}</li>
+                            
+                            <li>#{alamat}</li>
+                            <li>#{bakat}</li>
+                            <li>#{pengalaman}</li>
+                            <li>#{hobi}</li>
+                            <li>#{nomor}</li>
+                            
+                    $nothing
+                        Data input tampil disini...
+
+===================================================================
+
+-- Define our data that will be used for creating the form.
+getDaftarR :: Handler Html
+getDaftarR = do
+    (formWidget, formEnctype) <- generateFormPost formDaftar
+    let submission = Nothing :: Maybe Fomulirdata
+    defaultLayout $ do
+        setTitle "Registrasi"
+        $(widgetFile "daftar")
+
+postDaftarR :: Handler Html
+postDaftarR = do
+    ((result, formWidget), formEnctype) <- runFormPost formDaftar
+    let submission = case result of 
+            FormSuccess res -> Just res
+            _ -> Nothing
+    defaultLayout $ do
+        setTitle "Regisrasi"
+        $(widgetFile "daftar")
+=======================================================================
+
+<div .container>
+
+    <hr>
+         <div .row>
+            <h1 .header>
+                Registrasi
+            <h2>
+                Apakah kamu akan terpilih selanjutnya!
+
+        <div .row>
+            <div .col-lg-6>
+                <div .bs-callout bs-callout-info well>
+                    <form .form-horizontal method=post action=@{DaftarR}#forms enctype=#{formEnctype}>
+                        ^{formWidget}
+
+                        <button .btn.btn-success type="submit">
+                            Daftar!
+
+            <div .col-lg-4.col-lg-offset-1>
+                <div .bs-callout.bs-callout-info.upload-response>
+
+                    $maybe (Fomulirdata name institusi bidangkeahlian jeniskelamin tanggal_lahir alamat bakat pengalaman hobi nomor ) <- submission
+                        Data diri anda yang anda masukan :  
+                        <table>
+                            <tr>
+                                <td>
+                                    nama
+                                <td>
+                                    = #{name}
+                            <tr>
+                                <td>
+                                    Institusi 
+                                <td>
+                                    = #{institusi}
+                            <tr>
+                                <td>
+                                    Bidang Kahlian 
+                                <td>
+                                    = #{bidangkeahlian}
+                            <tr> 
+                                <td>
+                                    Jenis Kelamin 
+                                <td>
+                                    = #{jeniskelamin}
+                            <tr>
+                                <td>
+                                    Tanggal Lahir
+                                <td>
+                                    = #{tanggal_lahir}
+                            <tr>
+                                <td>
+                                    Alamat 
+                                <td>
+                                    = #{alamat}
+                            <tr>
+                                <td>
+                                    Bakat 
+                                <td>
+                                    = #{bakat}
+                            <tr>
+                                <td>
+                                    Pengalaman 
+                                <td>
+                                    = #{pengalaman}
+                            <tr> 
+                                <td>
+                                    Hobi 
+                                <td>
+                                    = #{hobi}
+                            <tr> 
+                                <td>
+                                    Nomor 
+                                <td>
+                                    = #{nomor}
+                            <tr>
+                                <td>
+                                    <a href=@{HomeR} .btn.btn-info.btn-sm>
+                                        Kembali!
+                            
+                    $nothing
+                        Data input tampil disini...

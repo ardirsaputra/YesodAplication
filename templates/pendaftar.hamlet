@@ -1,0 +1,53 @@
+<div .container>
+    <h3 .text-center>
+        Pendaftar
+    <hr>
+        <div .row>
+            <div .col-lg-12>
+                <table .demo-table>     
+                    <tr>
+                        <th>
+                            Nama
+                        <th>
+                            Institusi
+                        <th>
+                            Bidang Keahlian
+                        <th>
+                            Jenis Kelamin
+                        <th> 
+                            Tanggal Lahir 
+                        <th>
+                            Alamat
+                        <th>
+                            Bakat 
+                        <th>
+                            Pengalaman
+                        <th>
+                            Hobi
+                        <th>
+                            Nomor Telepon
+
+                    $forall user <- allUsers
+                        <tr>
+                            <td>
+                                #{userName $ entityVal user}
+                            <td>
+                                #{userInstitusi $ entityVal user}
+                            <td>
+                                #{userBidangkeahlian $ entityVal user}
+                            <td>
+                                #{userJeniskelamin $ entityVal user}
+                            <td> 
+                                #{userTanggal_lahir $ entityVal user}
+                            <td>
+                                #{userAlamat $ entityVal user}
+                            <td>
+                                #{userBakat $ entityVal user}
+                            <td>
+                                #{userPengalaman $ entityVal user}
+                            <td>
+                                #{userHobi $ entityVal user}
+                            <td>
+                                #{userNomor $ entityVal user}
+
+                <hr>

@@ -1,0 +1,25 @@
+<div .masthead>
+    <div .container>
+        <div .row>
+            <h1 .header>
+                Zakaa Community
+            <h2>
+                Gabung Bersama Kami 
+            <a href=@{DaftarR} .btn.btn-info.btn-lg>
+                Bergabung Sekarang 
+
+<div .container>
+    <!-- Starting
+        ================================================== -->
+    <div .bs-docs-section>
+        <div .row>
+            <div .col-lg-12>
+                <div .page-header>
+                    <h1 #start>Zakaa
+
+                    <p>
+                        Organisasi non profit yang berhubungan dengan membantu kehidupan masyarakat dengan 
+                        media teknologi dan informasi 
+                    <p>
+                        Zakaa merupakan organisasi pertama di lampung yang mengajak Developer IT / Programmer 
+                        dilampung terutama di bandar lampung untuk menghasilkan produk yang berguna dan memberi manfaat untuk banyak orang 

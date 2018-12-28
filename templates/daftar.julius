@@ -1,0 +1,41 @@
+$(function() {
+  $("##{rawJS pendaftaranFormId}").submit(function(event) {
+    event.preventDefault();
+
+    var nama = $("##{rawJS namaTextareaId}").val();
+    var institusi = $("##{rawJS institusiTextareaId}").val();
+    var bidangkeahlian = $("##{rawJS bidangkeahlianTextareaId}").val();
+    var jeniskelamin = $("##{rawJS jeniskelaminTextareaId}").val();
+    var tanggal_lahir = $("##{rawJS tanggal_lahirTextareaId}").val();
+    
+    var alamat = $("##{rawJS alamatTextareaId}").val();
+    var bakat = $("##{rawJS bakatTextareaId}").val();
+    var pengalaman = $("##{rawJS pengalamanTextareaId}").val();
+    var hobi = $("##{rawJS hobiTextareaId}").val();
+    var nomor = $("##{rawJS nomorTextareaId}").val();
+
+    $.ajax({
+      url: '@{PendaftarR}',
+      type: 'POST',
+      contentType: "application/json",
+      data: JSON.stringify({
+        nama: nama,
+        institusi: institusi,
+        bidangkeahlian: bidangkeahlian,
+        jeniskelamin: jeniskelamin,
+        tanggal_lahir: tanggal_lahir,
+        alamat: alamat,
+        bakat:bakat,
+        pengalaman:pengalaman,
+        hobi:hobi,
+        nomor:nomor
+      }),
+      success: function (data) {
+        console.log(data);
+      },
+      error: function (data) {
+        console.log("Error creating pendaftaran : " + data);
+      },
+    });
+  });
+});

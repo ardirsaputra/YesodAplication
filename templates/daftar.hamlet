@@ -1,0 +1,54 @@
+<div .container>
+
+    <hr>
+         <div .row>
+            <h1 .header>
+                Registrasi
+            <h2>
+                Apakah kamu akan terpilih selanjutnya!
+        <div .row>
+            <div .col-lg-12>
+                <div .bs-callout.bs-callout-info.well>
+                    <form .form-horizontal ##{pendaftaranFormId}>
+                        <div .field>
+                            Nama Lengkap:    
+                        <div .field>
+                            <input type="text" ##{namaTextareaId} placeholder="Nama anda..." required>
+                        <div .field>
+                            Instansi :    
+                        <div .field>
+                            <input type="text" ##{institusiTextareaId} placeholder="Instansi..." required>
+                        <div .field>
+                            Bidang Keahlian :    
+                        <div .field>
+                            <input type="text" ##{bidangkeahlianTextareaId} placeholder="Bidang Keahlian..." required>
+                        <div .field>
+                            Jenis Kelamin :    
+                        <div .field>
+                            <input type="text" ##{jeniskelaminTextareaId} placeholder="Jenis Kelamin..." required>
+                        <div .field>
+                            Tanggal Lahir :    
+                        <div .field>
+                            <input type="text" ##{tanggal_lahirTextareaId} placeholder="Tanggal Lahir..." required>
+                        <div .field>
+                            Alamat Tinggal :    
+                        <div .field>
+                            <input type="text" ##{alamatTextareaId} placeholder="Alamat tinggal..." required>
+                        <div .field>
+                            Bakat :    
+                        <div .field>
+                            <input type="text" ##{bakatTextareaId} placeholder="Bakat..." required>
+                        <div .field>
+                            Pengalaman :    
+                        <div .field>
+                            <input type="text" ##{pengalamanTextareaId} placeholder="Pengalaman..." required>
+                        <div .field>
+                            Hobi :    
+                        <div .field>
+                            <input type="text" ##{hobiTextareaId} placeholder="Hobi Anda ..." required>
+                        <div .field>
+                            Nomor Telepon  :    
+                        <div .field>
+                            <input type="text" ##{nomorTextareaId} placeholder="Nomor Telpon anda..." required>
+                        <button .btn.btn-success type=submit>
+                            Daftar

@@ -1,0 +1,14 @@
+User json
+    name Text 
+    institusi Text 
+    bidangkeahlian Text 
+    jeniskelamin Text 
+    tanggal_lahir Text
+    alamat Text 
+    bakat Text
+    pengalaman Text 
+    hobi Text
+    nomor Text
+    deriving Typeable
+    deriving Eq 
+    deriving Show 
